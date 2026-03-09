@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha",
-    "test:coverage": "c8 mocha",
-    "test:all": "npx mocha && c8 mocha"
+    "test": "npx mocha \"test/**/*.test.js\"",
+    "test:coverage": "c8 mocha \"test/**/*.test.js\"",
+    "test:all": "npx mocha \"test/**/*.test.js\" && c8 mocha \"test/**/*.test.js\""
   },
   "c8": {
     "all": true,
