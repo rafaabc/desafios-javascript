@@ -1,9 +1,25 @@
-/*
-Desafio: Calculadora de Desconto Progressivo
-Entradas: valor total da compra
-Processamento: aplicar faixa de desconto (0%, 10%, 20%) conforme valor
-Saída: string com valor original, desconto aplicado e valor final
-*/
+/**
+ * Desafio: Calculadora de Desconto Progressivo
+ *
+ * Descrição:
+ * Recebe o valor de um produto e aplica desconto progressivo conforme faixas
+ * de preço, retornando uma descrição com valor original, desconto aplicado
+ * e valor final.
+ *
+ * Regras:
+ * - Valores abaixo de R$ 100.01 têm 0% de desconto.
+ * - Valores entre R$ 100.01 e R$ 500.00 têm 10% de desconto.
+ * - Valores acima têm 20% de desconto.
+ *
+ * Entrada:
+ * - `valorDoProduto`: número (R$)
+ *
+ * Processamento:
+ * - Determinar faixa e calcular `valorDoDesconto` e `valorComDesconto`.
+ *
+ * Saída:
+ * - String: "Valor original: R$ X, Desconto aplicado: P% e Valor final a pagar: R$ Y."
+ */
 export function calcularDescontoProgressivo(valorDoProduto) {
   if (valorDoProduto >= 0.01 && valorDoProduto < 100.01) {
     const valorComDesconto = valorDoProduto;

@@ -1,9 +1,23 @@
-/*
-Desafio: Comparador de Três Números
-Entradas: três números diferentes
-Processamento: identificar maior, menor e meio
-Saída: string com maior, meio e menor
-*/
+/**
+ * Desafio: Comparador de Três Números
+ *
+ * Descrição:
+ * Recebe três números distintos e retorna uma string com o maior, o meio
+ * e o menor, na ordem apropriada.
+ *
+ * Regras:
+ * - Os números devem ser diferentes entre si.
+ * - Retornar no formato: "Maior: X, Meio: Y, Menor: Z."
+ *
+ * Entrada:
+ * - `n1`, `n2`, `n3`: números
+ *
+ * Processamento:
+ * - Comparar pares de números para determinar maior/meio/menor.
+ *
+ * Saída:
+ * - String: "Maior: X, Meio: Y, Menor: Z."
+ */
 export function compararTresNumerosDiferentes(n1, n2, n3) {
   let maior, meio, menor;
 

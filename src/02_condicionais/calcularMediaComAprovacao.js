@@ -1,9 +1,24 @@
-/*
-Desafio: Calculadora de Média com Aprovação
-Entradas: três notas
-Processamento: calcular média e classificar (>=7 aprovado, >=5 e <7 recuperação, <5 reprovado)
-Saída: string com média e situação
-*/
+/**
+ * Desafio: Calculadora de Média com Aprovação
+ *
+ * Descrição:
+ * Calcula a média de três notas e retorna uma mensagem indicando aprovação,
+ * recuperação ou reprovação conforme a média.
+ *
+ * Regras:
+ * - Média >= 7: aprovado
+ * - 5 <= Média < 7: recuperação
+ * - Média < 5: reprovado
+ *
+ * Entrada:
+ * - `n1`, `n2`, `n3`: números (notas)
+ *
+ * Processamento:
+ * - Calcular média aritmética e comparar com os limites para decidir a situação.
+ *
+ * Saída:
+ * - String com a média e a situação (aprovado/recuperação/reprovado).
+ */
 export function calcularMediaComAprovacao(n1, n2, n3) {
   const resultadoDaMedia = (n1 + n2 + n3) / 3;
 

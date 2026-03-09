@@ -1,9 +1,23 @@
-/*
-Desafio: Registrar Funcionário
-Entradas: CPF, nome, cargo, salario
-Processamento: validar cargo e salario mínimo
-Saída: retornar último funcionário cadastrado
-*/
+/**
+ * Desafio: Registrar Funcionário
+ *
+ * Descrição:
+ * Registra funcionários aplicando validações sobre cargo e salário mínimo,
+ * armazenando os registros e retornando o último funcionário cadastrado.
+ *
+ * Regras:
+ * - `cargo` deve ser um dos: Gerente, Analista, Assistente, Estagiário.
+ * - `salario` deve ser maior que 1412.
+ *
+ * Entrada:
+ * - Objeto com `CPF`, `nome`, `cargo`, `salario`.
+ *
+ * Processamento:
+ * - Validar cargo e salário; inserir funcionário na lista.
+ *
+ * Saída:
+ * - Retorna o último funcionário cadastrado (objeto).
+ */
 const funcionarios = [];
 
 export function registrarFuncionario({ CPF, nome, cargo, salario }) {

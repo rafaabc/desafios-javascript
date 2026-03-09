@@ -1,9 +1,23 @@
-/*
-Desafio: Gerenciar Controle de Despesa (listar e registrar)
-Entradas: (listar) nenhuma, (registrar) descricao, valor, categoria
-Processamento: manter lista de despesas e formatar
-Saída: lista formatada / última despesa registrada
-*/
+/**
+ * Desafio: Gerenciar Controle de Despesa
+ *
+ * Descrição:
+ * Mantém registros de despesas com operações de listar e registrar, retornando
+ * a lista ou o último registro criado.
+ *
+ * Regras:
+ * - Validar campos obrigatórios ao registrar (ex.: valor > 0).
+ *
+ * Entrada:
+ * - Para listar: nenhum parâmetro.
+ * - Para registrar: objeto com dados da despesa (`descricao`, `valor`, `categoria`).
+ *
+ * Processamento:
+ * - Validar e adicionar registro à lista.
+ *
+ * Saída:
+ * - Lista de despesas ou o último registro adicionado.
+ */
 const despesas = [
   {
     descricao: "Aluguel",

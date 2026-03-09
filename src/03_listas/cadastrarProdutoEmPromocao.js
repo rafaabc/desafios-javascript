@@ -1,10 +1,29 @@
-/*
-Desafio: Cadastro de Produtos em Promoção
-Entradas: codigoDeBarras, nome, precoOriginal, percentualDesconto
-Processamento: validar código único, preco > 0, desconto entre 0 e 90
-Saída: retornar o último produto cadastrado
-*/
-const produtosEmPromocao = [];
+/**
+ * Desafio: Cadastro de Produtos em Promoção
+ *
+ * Descrição:
+ * Cadastra produtos em promoção garantindo código de barras único,
+ * preço válido e percentual de desconto aceitável, retornando o último
+ * produto cadastrado.
+ *
+ * Regras:
+ * - `codigoDeBarras` não pode se repetir.
+ * - `precoOriginal` deve ser > 0.
+ * - `percentualDesconto` deve ser > 0 e <= 90.
+ *
+ * Entrada:
+ * - `codigoDeBarras`, `nome`, `precoOriginal`, `percentualDesconto`
+ *
+ * Processamento:
+ * - Validar unicidade e limites; criar objeto e adicioná-lo à lista.
+ *
+ * Saída:
+ * - Retorna o último produto cadastrado (objeto).
+ */
+const produtosEmPromocao = [
+  { codigoDeBarras: "0001", nome: "Sabão", precoOriginal: 5, percentualDesconto: 10 },
+  { codigoDeBarras: "0002", nome: "Arroz", precoOriginal: 20, percentualDesconto: 5 },
+];
 
 export function cadastrarProdutoEmPromocao({
   codigoDeBarras,

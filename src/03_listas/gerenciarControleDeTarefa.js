@@ -1,9 +1,23 @@
-/*
-Desafio: Gerenciar Controle de Tarefas (listar e registrar)
-Entradas: (listar) nenhuma, (registrar) descricao, prioridade, status
-Processamento: manter lista de tarefas e validar campos
-Saída: lista formatada / última tarefa cadastrada
-*/
+/**
+ * Desafio: Gerenciar Controle de Tarefa
+ *
+ * Descrição:
+ * Fornece operações para listar e registrar tarefas, mantendo-as em uma
+ * lista em memória e retornando o último registro quando solicitado.
+ *
+ * Regras:
+ * - Validar campos como prioridade e status ao registrar.
+ *
+ * Entrada:
+ * - Para listar: nenhum parâmetro.
+ * - Para registrar: objeto com dados da tarefa.
+ *
+ * Processamento:
+ * - Validar dados e adicionar à lista de tarefas.
+ *
+ * Saída:
+ * - Lista de tarefas ou o último registro adicionado.
+ */
 const tarefas = [
   {
     descricao: "Estudar JavaScript",
