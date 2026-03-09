@@ -1,9 +1,23 @@
-/*
-Desafio: Gerenciar Estoque (listar e registrar produtos)
-Entradas: (listar) nenhuma, (registrar) nome, quantidade, preco
-Processamento: manter lista de produtos, validar entrada
-Saída: lista formatada / último produto registrado
-*/
+/**
+ * Desafio: Gerenciar Estoque
+ *
+ * Descrição:
+ * Mantém uma lista de produtos em estoque com operações para listar e
+ * registrar novos produtos, retornando o último produto cadastrado.
+ *
+ * Regras:
+ * - Validar dados essenciais ao cadastrar (ex.: código, preço).
+ *
+ * Entrada:
+ * - Para listar: nenhuma entrada.
+ * - Para registrar: objeto com dados do produto.
+ *
+ * Processamento:
+ * - Validar e inserir produto na lista.
+ *
+ * Saída:
+ * - Lista de produtos ou o último produto registrado.
+ */
 const produtos = [
   {
     nome: "Arroz",

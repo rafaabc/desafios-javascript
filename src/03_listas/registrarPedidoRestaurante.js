@@ -1,17 +1,28 @@
 /*
 Desafio: Registrar Pedido de Restaurante
-Entradas: numeroPedido, nomePrato, quantidade, valorUnitario
-Processamento: validar número único, quantidade >=1, valorUnitario >0
-Saída: retornar último pedido cadastrado
+
+Descrição:
+Registra pedidos de restaurante validando duplicidade e retornando o
+último pedido registrado.
+
+Regras:
+- `numeroPedido` não pode se repetir.
+- `quantidade` >= 1.
+- `valorUnitario` > 0.
+
+Entrada:
+- Objeto com `numeroPedido`, `nomePrato`, `quantidade`, `valorUnitario`.
+
+Processamento:
+- Validar campos e adicionar o pedido à lista.
+
+Saída:
+- Retorna o último pedido registrado.
 */
+
 const pedidos = [];
 
-export function registrarPedido({
-  numeroPedido,
-  nomePrato,
-  quantidade,
-  valorUnitario,
-}) {
+export function registrarPedido({ numeroPedido, nomePrato, quantidade, valorUnitario }) {
   if (pedidos.some((pedido) => pedido.numeroPedido === numeroPedido)) {
     throw new Error("Número do pedido já existe.");
   }
@@ -24,14 +35,7 @@ export function registrarPedido({
     throw new Error("O valor unitário deve ser maior que 0.");
   }
 
-  const pedido = {
-    numeroPedido,
-    nomePrato,
-    quantidade,
-    valorUnitario,
-  };
-
+  const pedido = { numeroPedido, nomePrato, quantidade, valorUnitario };
   pedidos.push(pedido);
-
   return pedidos.at(-1);
 }

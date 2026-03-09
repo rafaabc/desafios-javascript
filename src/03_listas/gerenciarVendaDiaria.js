@@ -1,9 +1,23 @@
-/*
-Desafio: Gerenciar Vendas Diárias (listar e registrar)
-Entradas: (listar) nenhuma, (registrar) numero, valor
-Processamento: manter lista de vendas e formatar saída
-Saída: lista formatada / última venda registrada
-*/
+/**
+ * Desafio: Gerenciar Venda Diaria
+ *
+ * Descrição:
+ * Mantém registros das vendas diárias com operações para listar e inserir
+ * novas vendas, retornando o último registro cadastrado.
+ *
+ * Regras:
+ * - Validar integridade dos dados (ex.: valor > 0, forma de pagamento válida).
+ *
+ * Entrada:
+ * - Para listar: nenhuma.
+ * - Para registrar: objeto com dados da venda (`numero`, `valor`).
+ *
+ * Processamento:
+ * - Validar e adicionar à lista de vendas.
+ *
+ * Saída:
+ * - Lista de vendas ou o último registro adicionado.
+ */
 const vendas = [
   {
     numero: 1,

@@ -1,9 +1,24 @@
-/*
-Desafio: Gerenciar Cadastro de Funcionários (listar e registrar)
-Entradas: (listar) nenhuma, (registrar) nome, cargo, salario
-Processamento: manter lista, validar formatos ao registrar
-Saída: lista formatada / último funcionário cadastrado
-*/
+/**
+ * Desafio: Gerenciar Cadastro de Funcionário
+ *
+ * Descrição:
+ * Fornece operações de listar e registrar funcionários, mantendo uma lista
+ * em memória e aplicando validações necessárias.
+ *
+ * Regras:
+ * - CPF deve ser único quando aplicável.
+ * - Validações específicas aplicadas ao registrar (conforme função).
+ *
+ * Entrada:
+ * - Para listar: nenhuma entrada.
+ * - Para registrar: objeto com dados do funcionário.
+ *
+ * Processamento:
+ * - Validar dados ao registrar; adicionar à lista; retornar resultado.
+ *
+ * Saída:
+ * - Lista de funcionários ou o último funcionário registrado.
+ */
 const funcionarios = [
   {
     nome: "Carlos",

@@ -1,9 +1,23 @@
-/*
-Desafio: Gerenciar Cardápio de Restaurante (listar e registrar pratos)
-Entradas: (listar) nenhuma, (registrar) nome do prato, preco, calorias
-Processamento: manter lista e formatar saída
-Saída: lista formatada / último prato cadastrado
-*/
+/**
+ * Desafio: Gerenciar Cardápio de Restaurante
+ *
+ * Descrição:
+ * Permite listar pratos e registrar novos itens no cardápio, mantendo uma
+ * lista em memória e retornando o último prato cadastrado quando aplicável.
+ *
+ * Regras:
+ * - Evitar duplicação de identificadores quando aplicável.
+ *
+ * Entrada:
+ * - Para listar: nenhuma.
+ * - Para registrar: objeto com dados do prato (`nome`, `preco`, `calorias`).
+ *
+ * Processamento:
+ * - Adicionar novo prato à lista, aplicar validações básicas.
+ *
+ * Saída:
+ * - Lista de pratos ou o último prato registrado.
+ */
 const cardapio = [
   {
     nome: "Feijoada",

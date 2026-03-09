@@ -1,10 +1,28 @@
-/*
-Desafio: Sistema de Cadastro de Cursos
-Entradas: codigo, nome, cargaHoraria, categoria
-Processamento: validar código único, cargaHoraria e categorias permitidas
-Saída: retornar o último curso cadastrado
-*/
-const cursos = [];
+/**
+ * Desafio: Sistema de Cadastro de Cursos
+ *
+ * Descrição:
+ * Permite cadastrar cursos garantindo código único, carga horária válida e
+ * categoria permitida, retornando o último curso cadastrado.
+ *
+ * Regras:
+ * - `codigo` não pode se repetir.
+ * - `cargaHoraria` deve estar entre 4 e 200.
+ * - `categoria` deve ser uma das: Tecnologia, Design, Marketing, Negócios.
+ *
+ * Entrada:
+ * - `codigo`, `nome`, `cargaHoraria`, `categoria`
+ *
+ * Processamento:
+ * - Validar unicidade, limites e categoria; criar objeto curso e adicioná-lo.
+ *
+ * Saída:
+ * - Retorna o último curso cadastrado (objeto).
+ */
+const cursos = [
+  { codigo: "C001", nome: "Algoritmos", cargaHoraria: 40, categoria: "Tecnologia" },
+  { codigo: "C002", nome: "Design UX", cargaHoraria: 60, categoria: "Design" },
+];
 
 export function cadastrarCurso({ codigo, nome, cargaHoraria, categoria }) {
   if (cursos.some((c) => c.codigo === codigo)) {
