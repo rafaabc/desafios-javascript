@@ -21,13 +21,18 @@
  * - String informando a categoria, ex: "Sua idade é N. Você é adulto."
  */
 export function calculoMaioridadeExtendido(idade) {
-  if (idade >= 0 && idade < 13) {
-    return `Sua idade é ${idade}. Você é criança.`;
-  } else if (idade >= 13 && idade < 18) {
-    return `Sua idade é ${idade}. Você é adolescente.`;
-  } else if (idade >= 18 && idade < 60) {
-    return `Sua idade é ${idade}. Você é adulto.`;
-  } else {
-    return `Sua idade é ${idade}. Você é idoso.`;
+  [["idade", idade]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const idadeNum = Number(idade);
+  const faixas = [
+    { min: 0, max: 12, label: "criança" },
+    { min: 13, max: 17, label: "adolescente" },
+    { min: 18, max: 59, label: "adulto" },
+    { min: 60, max: Infinity, label: "idoso" },
+  ];
+
+  for (const faixa of faixas) {
+    if (idadeNum >= faixa.min && idadeNum <= faixa.max) return `Sua idade é ${idadeNum}. Você é ${faixa.label}.`;
   }
 }

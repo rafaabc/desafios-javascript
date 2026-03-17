@@ -25,16 +25,21 @@
  * - String com idade e texto sobre valor/gratuidade conforme enunciado.
  */
 export function calcularIngresso(idade) {
+  [["idade", idade]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const idadeNum = Number(idade);
   const valorInteira = 30;
   const valorMeia = valorInteira / 2;
+  const regras = [
+    { min: 0, max: 5, texto: `Você tem ${idadeNum} anos. O ingresso é gratuito.` },
+    { min: 6, max: 12, texto: `Você tem ${idadeNum} anos. O valor do ingresso é de R$ ${valorMeia}.` },
+    { min: 13, max: 59, texto: `Você tem ${idadeNum} anos. O valor do ingresso é de R$ ${valorInteira}.` },
+    { min: 60, max: Infinity, texto: `Você tem ${idadeNum} anos. O valor do ingresso é de R$ ${valorMeia}.` },
+  ];
 
-  if (idade >= 0 && idade < 6) {
-    return `Você tem ${idade} anos. O ingresso é gratuito.`;
-  } else if (idade >= 6 && idade < 13) {
-    return `Você tem ${idade} anos. O valor do ingresso é de R$ ${valorMeia}.`;
-  } else if (idade >= 13 && idade < 60) {
-    return `Você tem ${idade} anos. O valor do ingresso é de R$ ${valorInteira}.`;
-  } else {
-    return `Você tem ${idade} anos. O valor do ingresso é de R$ ${valorMeia}.`;
+  for (const regra of regras) {
+    if (idadeNum >= regra.min && idadeNum <= regra.max) return regra.texto;
   }
 }

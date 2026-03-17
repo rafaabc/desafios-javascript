@@ -12,6 +12,15 @@ describe("Testes do definirTriangulo", () => {
   });
   it("Quando enviar 2, 3 e 5 deve retornar inviabilidade do triângulo", () => {
     const medidas = definirTriangulo(2, 3, 5);
-    assert.equal(medidas, "As medidas 2, 3 e 5 não formam um triângulo.");
+    const esperado = "As medidas 2, 3 e 5 não formam um triângulo.";
+    assert.equal(
+      medidas,
+      esperado,
+    );
+  });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => definirTriangulo('a', 2, 3), {
+      message: /Parâmetro .* inválido: não é um número/
+    });
   });
 });

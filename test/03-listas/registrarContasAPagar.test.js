@@ -44,6 +44,13 @@ describe("Testes do registrarContasAPagar", () => {
       dataVencimento: 20,
     };
     const ultimoRegistro = registrarContasAPagar(conta);
-    assert.deepStrictEqual(ultimoRegistro, conta);
+    const esperado = conta;
+    assert.deepStrictEqual(ultimoRegistro, esperado);
+  });
+
+  it("quando valor for inválido (não numérico), deve lançar erro", () => {
+    assert.throws(() => {
+      registrarContasAPagar({ numeroConta: "005", descricao: "Conta X", valor: "cem", dataVencimento: 10 });
+    }, { message: /Parâmetro valor inválido: não é um número/ });
   });
 });

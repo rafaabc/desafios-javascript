@@ -27,24 +27,19 @@ Saída: retornar último registro de venda
 const vendas = [];
 
 export function registrarVenda({ numeroDaVenda, nomeDoCliente, valorDaVenda, formaDePagamento }) {
-  if (vendas.some((v) => v.numeroDaVenda === numeroDaVenda)) {
-    throw new Error("O número da venda não pode se repetir");
-  }
+  [["numeroDaVenda", numeroDaVenda], ["valorDaVenda", valorDaVenda]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const numeroNum = Number(numeroDaVenda);
+  const valorNum = Number(valorDaVenda);
 
-  if (valorDaVenda <= 0) {
-    throw new Error("O valor deve ser maior que 0");
-  }
+  if (vendas.some((v) => Number(v.numeroDaVenda) === numeroNum)) throw new Error("O número da venda não pode se repetir");
+  if (valorNum <= 0) throw new Error("O valor deve ser maior que 0");
 
-  if (
-    formaDePagamento != "Dinheiro" &&
-    formaDePagamento != "Débito" &&
-    formaDePagamento != "Crédito" &&
-    formaDePagamento != "PIX"
-  ) {
-    throw new Error("A forma de pagamento deve ser: Dinheiro, Débito, Crédito ou PIX");
-  }
+  const formasValidas = ["Dinheiro", "Débito", "Crédito", "PIX"];
+  if (!formasValidas.includes(formaDePagamento)) throw new Error("A forma de pagamento deve ser: Dinheiro, Débito, Crédito ou PIX");
 
-  const venda = { numeroDaVenda, nomeDoCliente, valorDaVenda, formaDePagamento };
+  const venda = { numeroDaVenda: numeroNum, nomeDoCliente, valorDaVenda: valorNum, formaDePagamento };
   vendas.push(venda);
   return vendas.at(-1);
 }

@@ -37,7 +37,11 @@ export function listarTemperaturas() {
 }
 
 export function registrarTemperatura({ horario, temperatura }) {
-  const novoRegistro = { horario, temperatura };
+  [["temperatura", temperatura]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const novoRegistro = { horario, temperatura: Number(temperatura) };
   temperaturas.push(novoRegistro);
   return temperaturas.at(-1);
 }

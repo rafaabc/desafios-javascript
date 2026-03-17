@@ -20,13 +20,12 @@
  * - String com a média e a situação (aprovado/recuperação/reprovado).
  */
 export function calcularMediaComAprovacao(n1, n2, n3) {
-  const resultadoDaMedia = (n1 + n2 + n3) / 3;
+  [["n1", n1], ["n2", n2], ["n3", n3]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  if (resultadoDaMedia >= 7) {
-    return `Parabéns! Sua média é de ${resultadoDaMedia} e você foi aprovado!`;
-  } else if (resultadoDaMedia >= 5 && resultadoDaMedia < 7) {
-    return `OK! Sua média é de ${resultadoDaMedia} e você está de recuperação. Ainda tem uma chance!`;
-  } else {
-    return `Ishh! Sua média é de ${resultadoDaMedia} e você foi reprovado :(`;
-  }
+  const media = (Number(n1) + Number(n2) + Number(n3)) / 3;
+  if (media >= 7) return `Parabéns! Sua média é de ${media} e você foi aprovado!`;
+  if (media >= 5) return `OK! Sua média é de ${media} e você está de recuperação. Ainda tem uma chance!`;
+  return `Ishh! Sua média é de ${media} e você foi reprovado :(`;
 }

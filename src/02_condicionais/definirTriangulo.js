@@ -17,15 +17,16 @@
  * Saída:
  * - String informando se as medidas formam ou não um triângulo.
  */
-export function definirTriangulo(a, b, c) {
-  const somaBC = b + c;
-  const somaAC = a + c;
-  const somaAB = a + b;
-  const viabilidadeTriangulo = a < somaBC && b < somaAC && c < somaAB;
+export function definirTriangulo(sideA, sideB, sideC) {
+  [["sideA", sideA], ["sideB", sideB], ["sideC", sideC]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  if (viabilidadeTriangulo) {
-    return `As medidas ${a}, ${b} e ${c} formam um triângulo.`;
-  } else {
-    return `As medidas ${a}, ${b} e ${c} não formam um triângulo.`;
-  }
+  const a = Number(sideA);
+  const b = Number(sideB);
+  const c = Number(sideC);
+  const viabilidadeTriangulo = a < b + c && b < a + c && c < a + b;
+  return viabilidadeTriangulo
+    ? `As medidas ${sideA}, ${sideB} e ${sideC} formam um triângulo.`
+    : `As medidas ${sideA}, ${sideB} e ${sideC} não formam um triângulo.`;
 }

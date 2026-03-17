@@ -9,13 +9,10 @@ describe("Testes do registrarVeiculo", () => {
       ano: 2020,
       preco: 10000,
     };
-    assert.throws(
-      () => {
-        registrarVeiculo(veiculoComPlacaDuplicada);
-        registrarVeiculo(veiculoComPlacaDuplicada);
-      },
-      { name: "Error", message: "A placa não pode se repetir" },
-    );
+    assert.throws(() => {
+      registrarVeiculo(veiculoComPlacaDuplicada);
+      registrarVeiculo(veiculoComPlacaDuplicada);
+    }, { message: /A placa não pode se repetir/ });
   });
 
   it("Quando enviar ano < 2000, deve lançar erro", () => {
@@ -25,15 +22,9 @@ describe("Testes do registrarVeiculo", () => {
       ano: 1999,
       preco: 10000,
     };
-    assert.throws(
-      () => {
-        registrarVeiculo(veiculoComAnoMenorQueDoisMil);
-      },
-      {
-        name: "Error",
-        message: "O ano deve ser maior ou igual a 2000 e menor ou igual a 2026",
-      },
-    );
+    assert.throws(() => {
+      registrarVeiculo(veiculoComAnoMenorQueDoisMil);
+    }, { message: /O ano deve ser maior ou igual a 2000 e menor ou igual a 2026/ });
   });
 
   it("Quando enviar ano > 2026, deve lançar erro", () => {
@@ -43,15 +34,9 @@ describe("Testes do registrarVeiculo", () => {
       ano: 2027,
       preco: 10000,
     };
-    assert.throws(
-      () => {
-        registrarVeiculo(veiculoComAnoMaiorQueDoisMileVinteESeis);
-      },
-      {
-        name: "Error",
-        message: "O ano deve ser maior ou igual a 2000 e menor ou igual a 2026",
-      },
-    );
+    assert.throws(() => {
+      registrarVeiculo(veiculoComAnoMaiorQueDoisMileVinteESeis);
+    }, { message: /O ano deve ser maior ou igual a 2000 e menor ou igual a 2026/ });
   });
 
   it("Quando enviar preço <= 10000, deve lançar erro", () => {
@@ -61,12 +46,15 @@ describe("Testes do registrarVeiculo", () => {
       ano: 2020,
       preco: 9999,
     };
-    assert.throws(
-      () => {
-        registrarVeiculo(veiculoComPrecoInvalido);
-      },
-      { name: "Error", message: "O preço deve ser maior ou igual a 10000" },
-    );
+    assert.throws(() => {
+      registrarVeiculo(veiculoComPrecoInvalido);
+    }, { message: /O preço deve ser maior ou igual a 10000/ });
+  });
+
+  it("Quando enviar preço não numérico, deve lançar erro", () => {
+    assert.throws(() => {
+      registrarVeiculo({ placa: 999999, modelo: "X", ano: 2020, preco: "dez mil" });
+    }, { message: /Parâmetro preco inválido: não é um número/ });
   });
 
   it("Quando enviar veiculo com dados válidos, deve retornar o último veículo", () => {
@@ -78,11 +66,7 @@ describe("Testes do registrarVeiculo", () => {
     };
 
     const veiculoRegistrado = registrarVeiculo(veiculoComDadosValidos);
-    assert.deepEqual(veiculoRegistrado, {
-      placa: 132456,
-      modelo: "Fiat",
-      ano: 2020,
-      preco: 10000,
-    });
+    const esperado = { placa: 132456, modelo: "Fiat", ano: 2020, preco: 10000 };
+    assert.deepEqual(veiculoRegistrado, esperado);
   });
 });

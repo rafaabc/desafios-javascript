@@ -21,18 +21,14 @@
  * - String: "Valor original: R$ X, Desconto aplicado: P% e Valor final a pagar: R$ Y."
  */
 export function calcularDescontoProgressivo(valorDoProduto) {
-  if (valorDoProduto >= 0.01 && valorDoProduto < 100.01) {
-    const valorComDesconto = valorDoProduto;
-    return `Valor original: R$ ${valorDoProduto}, Desconto aplicado: 0% e Valor final a pagar: R$ ${valorComDesconto}.`;
-  } else if (valorDoProduto >= 100.01 && valorDoProduto < 500.01) {
-    const desconto = 10;
-    const valorDoDesconto = (desconto / 100) * valorDoProduto;
-    const valorComDesconto = valorDoProduto - valorDoDesconto;
-    return `Valor original: R$ ${valorDoProduto}, Desconto aplicado: ${desconto}% e Valor final a pagar: R$ ${valorComDesconto}.`;
-  } else {
-    const desconto = 20;
-    const valorDoDesconto = (desconto / 100) * valorDoProduto;
-    const valorComDesconto = valorDoProduto - valorDoDesconto;
-    return `Valor original: R$ ${valorDoProduto}, Desconto aplicado: ${desconto}% e Valor final a pagar: R$ ${valorComDesconto}.`;
-  }
+  [["valorDoProduto", valorDoProduto]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const valor = Number(valorDoProduto);
+  const desconto = valor >= 500.01 ? 20 : valor >= 100.01 ? 10 : 0;
+  const valorDoDesconto = (desconto / 100) * valor;
+  const valorComDesconto = valor - valorDoDesconto;
+
+  return `Valor original: R$ ${valor}, Desconto aplicado: ${desconto}% e Valor final a pagar: R$ ${valorComDesconto}.`;
 }

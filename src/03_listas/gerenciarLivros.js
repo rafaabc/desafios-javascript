@@ -36,6 +36,10 @@ export function listarLivros() {
 }
 
 export function registrarLivro({ titulo, autor, paginas }) {
-  livros.push({ titulo, autor, paginas });
+  [["paginas", paginas]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  livros.push({ titulo, autor, paginas: Number(paginas) });
   return livros.at(-1);
 }

@@ -21,11 +21,13 @@ Saída:
 const livros = [];
 
 export function registrarLivro({ ISBN, titulo, autor, anoDePublicacao }) {
-  if (anoDePublicacao <= 1500 || anoDePublicacao > 2026) {
-    throw new Error("O ano de publicação deve ser maior que 1500 e menor ou igual a 2026");
-  }
+  [["anoDePublicacao", anoDePublicacao]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const ano = Number(anoDePublicacao);
+  if (ano <= 1500 || ano > 2026) throw new Error("O ano de publicação deve ser maior que 1500 e menor ou igual a 2026");
 
-  const livro = { ISBN, titulo, autor, anoDePublicacao };
+  const livro = { ISBN, titulo, autor, anoDePublicacao: ano };
   livros.push(livro);
   return livros.at(-1);
 }

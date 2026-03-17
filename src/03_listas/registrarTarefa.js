@@ -26,19 +26,18 @@ Saída: retornar última tarefa cadastrada
 const tarefas = [];
 
 export function registrarTarefa({ id, descricao, prioridade, status }) {
-  if (tarefas.some((t) => t.id === id)) {
-    throw new Error("O ID não pode se repetir");
-  }
+  [["id", id]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const idNum = Number(id);
+  if (tarefas.some((t) => Number(t.id) === idNum)) throw new Error("O ID não pode se repetir");
 
-  if (prioridade != "Baixa" && prioridade != "Média" && prioridade != "Alta") {
-    throw new Error("A prioridade deve ser: Baixa, Média ou Alta");
-  }
+  const prioridadesValidas = ["Baixa", "Média", "Alta"];
+  const statusValidos = ["Pendente", "Em andamento", "Concluída"];
+  if (!prioridadesValidas.includes(prioridade)) throw new Error("A prioridade deve ser: Baixa, Média ou Alta");
+  if (!statusValidos.includes(status)) throw new Error("O status deve ser: Pendente, Em andamento ou Concluída");
 
-  if (status != "Pendente" && status != "Em andamento" && status != "Concluída") {
-    throw new Error("O status deve ser: Pendente, Em andamento ou Concluída");
-  }
-
-  const tarefa = { id, descricao, prioridade, status };
+  const tarefa = { id: idNum, descricao, prioridade, status };
   tarefas.push(tarefa);
   return tarefas.at(-1);
 }

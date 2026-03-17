@@ -18,37 +18,19 @@
  * Saída:
  * - String: "Maior: X, Meio: Y, Menor: Z."
  */
-export function compararTresNumerosDiferentes(n1, n2, n3) {
-  let maior, meio, menor;
+export function compararTresNumerosDiferentes(num1, num2, num3) {
+  [["num1", num1], ["num2", num2], ["num3", num3]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  if (n1 > n2 && n1 > n3) {
-    maior = n1;
-    if (n2 > n3) {
-      meio = n2;
-      menor = n3;
-    } else {
-      meio = n3;
-      menor = n2;
-    }
-  } else if (n2 > n1 && n2 > n3) {
-    maior = n2;
-    if (n1 > n3) {
-      meio = n1;
-      menor = n3;
-    } else {
-      meio = n3;
-      menor = n1;
-    }
-  } else {
-    maior = n3;
-    if (n1 > n2) {
-      meio = n1;
-      menor = n2;
-    } else {
-      meio = n2;
-      menor = n1;
-    }
-  }
+  const n1 = Number(num1);
+  const n2 = Number(num2);
+  const n3 = Number(num3);
 
+  if (n1 === n2 || n1 === n3 || n2 === n3) throw new Error("Os números devem ser diferentes entre si");
+
+  const maior = Math.max(n1, n2, n3);
+  const menor = Math.min(n1, n2, n3);
+  const meio = n1 + n2 + n3 - maior - menor;
   return `Maior: ${maior}, Meio: ${meio}, Menor: ${menor}.`;
 }

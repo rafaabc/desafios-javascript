@@ -12,7 +12,11 @@
  * - Retornar exatamente o formato de string especificado.
  */
 export function converterDKKEUR(valorEmDKK) {
-  const valorEmEUR = valorEmDKK * 0.13;
+  [["valorEmDKK", valorEmDKK]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const valorEmEUR = Number(valorEmDKK) * 0.13;
 
   return `${valorEmDKK} DKK equivalem a ${valorEmEUR} EUR.`;
 }

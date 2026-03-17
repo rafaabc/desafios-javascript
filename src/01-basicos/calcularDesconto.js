@@ -23,8 +23,12 @@
  * - String: "O valor do desconto é de R$ X e o preço final a pagar é de R$ Y."
  */
 export function calcularDesconto(valorDoProduto, porcentagemDoDesconto) {
-  const valorDoDesconto = (porcentagemDoDesconto / 100) * valorDoProduto;
-  const valorComDesconto = valorDoProduto - valorDoDesconto;
+  [["valorDoProduto", valorDoProduto], ["porcentagemDoDesconto", porcentagemDoDesconto]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const valorDoDesconto = (Number(porcentagemDoDesconto) / 100) * Number(valorDoProduto);
+  const valorComDesconto = Number(valorDoProduto) - valorDoDesconto;
 
   return `O valor do desconto é de R$ ${valorDoDesconto} e o preço final a pagar é de R$ ${valorComDesconto}.`;
 }

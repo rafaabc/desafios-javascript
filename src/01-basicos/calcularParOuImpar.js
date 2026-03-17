@@ -11,11 +11,8 @@
  * - Retornar exatamente o formato de mensagem especificado.
  */
 export function calcularParOuImpar(numero) {
-  const restoDaDivisao = numero % 2;
+  if (Number.isNaN(Number(numero))) throw new Error('Parâmetro numero inválido: não é um número');
 
-  if (restoDaDivisao == 0) {
-    return `O número ${numero} é par.`;
-  } else {
-    return `O número ${numero} é ímpar.`;
-  }
+  const valor = Number(numero);
+  return valor % 2 == 0 ? `O número ${valor} é par.` : `O número ${valor} é ímpar.`;
 }

@@ -12,7 +12,7 @@ describe("Testes do cadastrarProdutoEmPromocao", () => {
     cadastrarProdutoEmPromocao(produto1);
     assert.throws(() => {
       cadastrarProdutoEmPromocao(produto1);
-    }, /Código de barras já existe/);
+    }, { message: /Código de barras já existe/ });
   });
   it("quando preço original é menor ou igual a 0, deve lançar um erro", () => {
     const produto = {
@@ -23,7 +23,7 @@ describe("Testes do cadastrarProdutoEmPromocao", () => {
     };
     assert.throws(() => {
       cadastrarProdutoEmPromocao(produto);
-    }, /O preço original deve ser maior que 0/);
+    }, { message: /O preço original deve ser maior que 0/ });
   });
   it("quando percentual de desconto é menor ou igual a 0, deve lançar um erro", () => {
     const produto = {
@@ -34,7 +34,7 @@ describe("Testes do cadastrarProdutoEmPromocao", () => {
     };
     assert.throws(() => {
       cadastrarProdutoEmPromocao(produto);
-    }, /O percentual de desconto deve ser maior que 0 e menor ou igual a 90/);
+    }, { message: /O percentual de desconto deve ser maior que 0 e menor ou igual a 90/ });
   });
   it("quando percentual de desconto é maior que 90, deve lançar um erro", () => {
     const produto = {
@@ -45,7 +45,7 @@ describe("Testes do cadastrarProdutoEmPromocao", () => {
     };
     assert.throws(() => {
       cadastrarProdutoEmPromocao(produto);
-    }, /O percentual de desconto deve ser maior que 0 e menor ou igual a 90/);
+    }, { message: /O percentual de desconto deve ser maior que 0 e menor ou igual a 90/ });
   });
   it("quando os dados são válidos, deve cadastrar o produto e retornar o último produto cadastrado", () => {
     const produto = {
@@ -55,6 +55,19 @@ describe("Testes do cadastrarProdutoEmPromocao", () => {
       percentualDesconto: 20,
     };
     const ultimoProduto = cadastrarProdutoEmPromocao(produto);
-    assert.deepStrictEqual(ultimoProduto, produto);
+    const esperado = produto;
+    assert.deepStrictEqual(ultimoProduto, esperado);
+  });
+
+  it("quando precoOriginal for inválido (não numérico), deve lançar erro", () => {
+    assert.throws(() => {
+      cadastrarProdutoEmPromocao({ codigoDeBarras: "000111222", nome: "X", precoOriginal: "cem", percentualDesconto: 10 });
+    }, { message: /Parâmetro precoOriginal inválido: não é um número/ });
+  });
+
+  it("quando percentualDesconto for inválido (não numérico), deve lançar erro", () => {
+    assert.throws(() => {
+      cadastrarProdutoEmPromocao({ codigoDeBarras: "000111223", nome: "Y", precoOriginal: 10, percentualDesconto: "dez" });
+    }, { message: /Parâmetro percentualDesconto inválido: não é um número/ });
   });
 });

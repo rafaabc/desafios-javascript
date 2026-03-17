@@ -12,17 +12,17 @@
  * - Retornar exatamente as strings especificadas.
  */
 export function verificarAnoBissexto(ano) {
-  const divisivelPor4 = ano % 4 == 0;
-  const divisivelPor100 = ano % 100 == 0;
-  const divisivelPor400 = ano % 400 == 0;
+  [["ano", ano]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  if (divisivelPor400) {
-    return `O ano ${ano} é bissexto.`;
-  } else if (divisivelPor100) {
-    return `O ano ${ano} não é bissexto.`;
-  } else if (divisivelPor4) {
-    return `O ano ${ano} é bissexto.`;
-  } else {
-    return `O ano ${ano} não é bissexto.`;
-  }
+  const anoNum = Number(ano);
+  const divisivelPor4 = anoNum % 4 == 0;
+  const divisivelPor100 = anoNum % 100 == 0;
+  const divisivelPor400 = anoNum % 400 == 0;
+
+  if (divisivelPor400) return `O ano ${anoNum} é bissexto.`;
+  if (divisivelPor100) return `O ano ${anoNum} não é bissexto.`;
+  if (divisivelPor4) return `O ano ${anoNum} é bissexto.`;
+  return `O ano ${anoNum} não é bissexto.`;
 }

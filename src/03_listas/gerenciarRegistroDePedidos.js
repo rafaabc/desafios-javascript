@@ -37,7 +37,11 @@ export function listarPedidos() {
 }
 
 export function registrarPedido({ numero, item, quantidade, valorUnitario }) {
-  const novoPedido = { numero, item, quantidade, valorUnitario };
+  [["numero", numero], ["quantidade", quantidade], ["valorUnitario", valorUnitario]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const novoPedido = { numero: Number(numero), item, quantidade: Number(quantidade), valorUnitario: Number(valorUnitario) };
   pedidos.push(novoPedido);
   return pedidos.at(-1);
 }

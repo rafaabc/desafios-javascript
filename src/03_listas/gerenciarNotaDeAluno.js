@@ -35,10 +35,11 @@ export function listarAlunos() {
 }
 
 export function registrarAluno({ nome, nota }) {
-  const novoAluno = {
-    nome,
-    nota,
-  };
+  [["nota", nota]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const novoAluno = { nome, nota: Number(nota) };
   alunos.push(novoAluno);
   return alunos.at(-1);
 }

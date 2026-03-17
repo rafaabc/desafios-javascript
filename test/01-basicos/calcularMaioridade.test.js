@@ -16,4 +16,16 @@ describe("Testes do calcularMaioridade", () => {
     const resultado = calcularMaioridade(2026, 2007);
     assert.equal(resultado, "Sua idade é de 19 anos. Você é maior de idade.");
   });
+
+  it("Quando anoAtual for inválido (não numérico), deve lançar erro", () => {
+    assert.throws(() => {
+      calcularMaioridade("dois mil e vinte seis", 2007);
+    }, { message: /Parâmetro anoAtual inválido: não é um número/ });
+  });
+
+  it("Quando anoNascimento for inválido (não numérico), deve lançar erro", () => {
+    assert.throws(() => {
+      calcularMaioridade(2026, "dois mil e sete");
+    }, { message: /Parâmetro anoNascimento inválido: não é um número/ });
+  });
 });

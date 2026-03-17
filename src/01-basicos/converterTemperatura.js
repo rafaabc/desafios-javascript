@@ -13,8 +13,13 @@
  * - Retornar exatamente a string no formato especificado.
  */
 export function converterTemperatura(temperaturaCelsius) {
-  const temperaturaFahrenheit = temperaturaCelsius * 1.8 + 32;
-  const temperaturaKelvin = temperaturaCelsius + 273.15;
+  [["temperaturaCelsius", temperaturaCelsius]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  return `${temperaturaCelsius}º Celsius equivalem a ${temperaturaFahrenheit} Fahrenheit e ${temperaturaKelvin} Kelvin.`;
+  const temperatura = Number(temperaturaCelsius);
+  const temperaturaFahrenheit = temperatura * 1.8 + 32;
+  const temperaturaKelvin = temperatura + 273.15;
+
+  return `${temperatura}º Celsius equivalem a ${temperaturaFahrenheit} Fahrenheit e ${temperaturaKelvin} Kelvin.`;
 }

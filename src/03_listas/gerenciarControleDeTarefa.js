@@ -47,11 +47,19 @@ export function listarTarefas() {
 }
 
 export function registrarTarefa({ descricao, prioridade, status }) {
-  const novaTarefa = {
-    descricao,
-    prioridade,
-    status,
-  };
+  if (!descricao || typeof descricao !== 'string') throw new Error('Parâmetro descricao inválido');
+
+  const prioridadesValidas = ['Alta', 'Média', 'Baixa'];
+  if (!prioridade || !prioridadesValidas.includes(prioridade)) {
+    throw new Error('Parâmetro prioridade inválido');
+  }
+
+  const statusValidos = ['Pendente', 'Concluída'];
+  if (!status || !statusValidos.includes(status)) {
+    throw new Error('Parâmetro status inválido');
+  }
+
+  const novaTarefa = { descricao, prioridade, status };
   tarefas.push(novaTarefa);
   return tarefas.at(-1);
 }

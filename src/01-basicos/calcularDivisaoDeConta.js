@@ -21,7 +21,12 @@
  * - String: "Cada pessoa deve pagar R$ X." (X = resultado numérico)
  */
 export function calcularDivisaoDeConta(valorTotalConta, quantidadeDePessoas) {
-  const resultado = valorTotalConta / quantidadeDePessoas;
+  [["valorTotalConta", valorTotalConta], ["quantidadeDePessoas", quantidadeDePessoas]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  if (Number(quantidadeDePessoas) === 0) throw new Error('Parâmetro quantidadeDePessoas inválido: divisão por zero');
+
+  const resultado = Number(valorTotalConta) / Number(quantidadeDePessoas);
 
   return `Cada pessoa deve pagar R$ ${resultado}.`;
 }

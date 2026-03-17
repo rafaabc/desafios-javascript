@@ -23,11 +23,11 @@
  * - String: "Sua idade é de X anos. Você é maior de idade." ou "... menor de idade."
  */
 export function calcularMaioridade(anoAtual, anoNascimento) {
-  const idade = anoAtual - anoNascimento;
+  [["anoAtual", anoAtual], ["anoNascimento", anoNascimento]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  if (idade >= 18) {
-    return "Sua idade é de " + idade + " anos. Você é maior de idade.";
-  } else {
-    return "Sua idade é de " + idade + " anos. Você é menor de idade.";
-  }
+  const idade = Number(anoAtual) - Number(anoNascimento);
+  if (idade >= 18) return `Sua idade é de ${idade} anos. Você é maior de idade.`;
+  return `Sua idade é de ${idade} anos. Você é menor de idade.`;
 }

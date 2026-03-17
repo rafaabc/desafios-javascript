@@ -9,16 +9,10 @@ describe("Testes do registrarVenda", () => {
       valorDaVenda: 0.01,
       formaDePagamento: "PIX",
     };
-    assert.throws(
-      () => {
-        registrarVenda(vendaComDadosValidos);
-        registrarVenda(vendaComDadosValidos);
-      },
-      {
-        name: "Error",
-        message: "O número da venda não pode se repetir",
-      },
-    );
+    assert.throws(() => {
+      registrarVenda(vendaComDadosValidos);
+      registrarVenda(vendaComDadosValidos);
+    }, { message: /O número da venda não pode se repetir/ });
   });
   it("Quando valor de venda igual a zero, deve lançar erro", () => {
     const vendaComValorZerado = {
@@ -27,15 +21,9 @@ describe("Testes do registrarVenda", () => {
       valorDaVenda: 0,
       formaDePagamento: "PIX",
     };
-    assert.throws(
-      () => {
-        registrarVenda(vendaComValorZerado);
-      },
-      {
-        name: "Error",
-        message: "O valor deve ser maior que 0",
-      },
-    );
+    assert.throws(() => {
+      registrarVenda(vendaComValorZerado);
+    }, { message: /O valor deve ser maior que 0/ });
   });
   it("Quando forma de pagamento diferente de dinheir, débito, crédito ou pix, deve lançar erro", () => {
     const vendaComformaDePagamentoInvalido = {
@@ -44,16 +32,9 @@ describe("Testes do registrarVenda", () => {
       valorDaVenda: 0.01,
       formaDePagamento: "fiado",
     };
-    assert.throws(
-      () => {
-        registrarVenda(vendaComformaDePagamentoInvalido);
-      },
-      {
-        name: "Error",
-        message:
-          "A forma de pagamento deve ser: Dinheiro, Débito, Crédito ou PIX",
-      },
-    );
+    assert.throws(() => {
+      registrarVenda(vendaComformaDePagamentoInvalido);
+    }, { message: /A forma de pagamento deve ser: Dinheiro, Débito, Crédito ou PIX/ });
   });
   it("Quando enviar venda com dados válidos, deve retornar a última venda", () => {
     const vendaComDadosValidos = {
@@ -63,11 +44,13 @@ describe("Testes do registrarVenda", () => {
       formaDePagamento: "PIX",
     };
     const vendaRegistrada = registrarVenda(vendaComDadosValidos);
-    assert.deepEqual(vendaRegistrada, {
-      numeroDaVenda: 4,
-      nomeDoCliente: "teste",
-      valorDaVenda: 0.01,
-      formaDePagamento: "PIX",
-    });
+    const esperado = { numeroDaVenda: 4, nomeDoCliente: "teste", valorDaVenda: 0.01, formaDePagamento: "PIX" };
+    assert.deepEqual(vendaRegistrada, esperado);
+  });
+
+  it("Quando valorDaVenda não for numérico deve lançar erro", () => {
+    assert.throws(() => {
+      registrarVenda({ numeroDaVenda: 5, nomeDoCliente: "X", valorDaVenda: "zero", formaDePagamento: "PIX" });
+    }, { message: /Parâmetro valorDaVenda inválido: não é um número/ });
   });
 });

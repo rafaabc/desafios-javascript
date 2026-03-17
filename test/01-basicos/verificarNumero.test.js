@@ -12,6 +12,15 @@ describe("Testes do verificarNumero", () => {
   });
   it("Quando enviar 7 deve retornar positivo", () => {
     const resultado = verificarNumero(7);
-    assert.equal(resultado, "7 é um número positivo.");
+    const esperado = "7 é um número positivo.";
+    assert.equal(
+      resultado,
+      esperado,
+    );
+  });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => verificarNumero('x'), {
+      message: /Parâmetro .* inválido: não é um número/
+    });
   });
 });

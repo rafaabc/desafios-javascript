@@ -18,4 +18,9 @@ describe("Testes do verificarAnoBissexto", () => {
     const resultado = verificarAnoBissexto(2000);
     assert.equal(resultado, "O ano 2000 é bissexto.");
   });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => verificarAnoBissexto('abc'), {
+      message: /Parâmetro .* inválido: não é um número/
+    });
+  });
 });

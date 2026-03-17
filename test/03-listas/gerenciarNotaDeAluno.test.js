@@ -12,6 +12,13 @@ describe("Testes do gerenciarNotaDeAluno", () => {
   it("Quando registrar aluno, deve retornar o último aluno cadastrado", () => {
     const novo = { nome: "Teste", nota: 8 };
     const ultimo = registrarAluno(novo);
-    assert.deepEqual(ultimo, novo);
+    const esperado = novo;
+    assert.deepEqual(ultimo, esperado);
+  });
+
+  it("Quando registrar aluno com nota inválida (não numérica), deve lançar erro", () => {
+    assert.throws(() => {
+      registrarAluno({ nome: "X", nota: "oito" });
+    }, { message: /Parâmetro nota inválido: não é um número/ });
   });
 });

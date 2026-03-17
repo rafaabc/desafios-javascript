@@ -21,4 +21,19 @@ describe("Testes do gerenciarControleDeTarefa", () => {
 
     assert.deepEqual(resultadoEsperado, resultadoAtual);
   });
+  it("quando descricao for inválida deve lançar erro", () => {
+    assert.throws(() => registrarTarefa({ descricao: '', prioridade: 'Alta', status: 'Pendente' }), {
+      message: /Parâmetro descricao inválido/
+    });
+  });
+  it("quando prioridade for inválida deve lançar erro", () => {
+    assert.throws(() => registrarTarefa({ descricao: 'X', prioridade: 'Muito Alta', status: 'Pendente' }), {
+      message: /Parâmetro prioridade inválido/
+    });
+  });
+  it("quando status for inválido deve lançar erro", () => {
+    assert.throws(() => registrarTarefa({ descricao: 'Y', prioridade: 'Alta', status: 'Em pausa' }), {
+      message: /Parâmetro status inválido/
+    });
+  });
 });

@@ -31,30 +31,20 @@ export function cadastrarProdutoEmPromocao({
   precoOriginal,
   percentualDesconto,
 }) {
-  if (
-    produtosEmPromocao.some(
-      (produto) => produto.codigoDeBarras === codigoDeBarras,
-    )
-  ) {
+  if (produtosEmPromocao.some((produto) => produto.codigoDeBarras === codigoDeBarras)) {
     throw new Error("Código de barras já existe.");
   }
 
-  if (precoOriginal <= 0) {
-    throw new Error("O preço original deve ser maior que 0.");
-  }
+  [["precoOriginal", precoOriginal], ["percentualDesconto", percentualDesconto]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  if (percentualDesconto <= 0 || percentualDesconto > 90) {
-    throw new Error(
-      "O percentual de desconto deve ser maior que 0 e menor ou igual a 90.",
-    );
-  }
+  const preco = Number(precoOriginal);
+  const percentual = Number(percentualDesconto);
+  if (preco <= 0) throw new Error("O preço original deve ser maior que 0.");
+  if (percentual <= 0 || percentual > 90) throw new Error("O percentual de desconto deve ser maior que 0 e menor ou igual a 90.");
 
-  const produto = {
-    codigoDeBarras,
-    nome,
-    precoOriginal,
-    percentualDesconto,
-  };
+  const produto = { codigoDeBarras, nome, precoOriginal: preco, percentualDesconto: percentual };
 
   produtosEmPromocao.push(produto);
 

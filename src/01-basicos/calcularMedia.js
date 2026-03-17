@@ -21,7 +21,11 @@
  * - String: "O resultado da média de X, Y e Z é igual a M." (M = resultado)
  */
 export function calcularMedia(n1, n2, n3) {
-  const resultadoDaMedia = (n1 + n2 + n3) / 3;
+  [["n1", n1], ["n2", n2], ["n3", n3]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  return `O resultado da média de ${n1}, ${n2} e ${n3} é igual a ${resultadoDaMedia}.`;
+  const media = (Number(n1) + Number(n2) + Number(n3)) / 3;
+
+  return `O resultado da média de ${n1}, ${n2} e ${n3} é igual a ${media}.`;
 }

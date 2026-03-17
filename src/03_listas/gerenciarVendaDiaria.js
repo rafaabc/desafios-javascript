@@ -48,10 +48,10 @@ export function listarVendas() {
 }
 
 export function registrarVenda({ numero, valor }) {
-  const novaVenda = {
-    numero,
-    valor,
-  };
+  [["numero", numero], ["valor", valor]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const novaVenda = { numero: Number(numero), valor: Number(valor) };
   vendas.push(novaVenda);
   return vendas.at(-1);
 }

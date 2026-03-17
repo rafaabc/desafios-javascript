@@ -9,4 +9,12 @@ describe("Testes do calcularDesconto", () => {
       "O valor do desconto é de R$ 10 e o preço final a pagar é de R$ 90.",
     );
   });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => calcularDesconto('abc', 10), {
+      message: /Parâmetro valorDoProduto inválido: não é um número/
+    });
+    assert.throws(() => calcularDesconto(100, 'xyz'), {
+      message: /Parâmetro porcentagemDoDesconto inválido: não é um número/
+    });
+  });
 });

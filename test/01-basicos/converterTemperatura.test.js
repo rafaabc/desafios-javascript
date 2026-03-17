@@ -23,4 +23,9 @@ describe("Testes do converterTemperatura", () => {
       "25º Celsius equivalem a 77 Fahrenheit e 298.15 Kelvin.",
     );
   });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => converterTemperatura('abc'), {
+      message: /Parâmetro .* inválido: não é um número/
+    });
+  });
 });

@@ -32,6 +32,20 @@ describe("Testes do calculoMaioridadeExtendido", () => {
   });
   it("Quando idade é igual a 60 retornar idoso", () => {
     const idade = calculoMaioridadeExtendido(60);
-    assert.equal(idade, "Sua idade é 60. Você é idoso.");
+    const esperado = "Sua idade é 60. Você é idoso.";
+    assert.equal(
+      idade,
+      esperado,
+    );
+  });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => calculoMaioridadeExtendido('x'), {
+      message: /Parâmetro .* inválido: não é um número/
+    });
+  });
+
+  it("Quando enviar idade negativa que não se encaixe em nenhuma faixa, deve retornar undefined", () => {
+    const resultado = calculoMaioridadeExtendido(-5);
+    assert.equal(resultado, undefined);
   });
 });

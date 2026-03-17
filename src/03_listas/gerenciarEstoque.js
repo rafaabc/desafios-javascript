@@ -47,11 +47,11 @@ export function listarProdutos() {
 }
 
 export function registrarProduto({ nome, quantidade, preco }) {
-  const novoProduto = {
-    nome,
-    quantidade,
-    preco,
-  };
+  [["quantidade", quantidade], ["preco", preco]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const novoProduto = { nome, quantidade: Number(quantidade), preco: Number(preco) };
   produtos.push(novoProduto);
   return produtos.at(-1);
 }

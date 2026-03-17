@@ -23,19 +23,17 @@ Saída:
 const contasAPagar = [];
 
 export function registrarContasAPagar({ numeroConta, descricao, valor, dataVencimento }) {
-  if (contasAPagar.some((conta) => conta.numeroConta === numeroConta)) {
-    throw new Error("Número da conta já existe");
-  }
+  if (contasAPagar.some((conta) => conta.numeroConta === numeroConta)) throw new Error("Número da conta já existe");
 
-  if (valor <= 0) {
-    throw new Error("O valor deve ser maior que 0");
-  }
+  [["valor", valor], ["dataVencimento", dataVencimento]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const valorNum = Number(valor);
+  if (valorNum <= 0) throw new Error("O valor deve ser maior que 0");
+  const dataNum = Number(dataVencimento);
+  if (dataNum < 1 || dataNum > 31) throw new Error("A data de vencimento deve ser entre 1 e 31");
 
-  if (dataVencimento < 1 || dataVencimento > 31) {
-    throw new Error("A data de vencimento deve ser entre 1 e 31");
-  }
-
-  const conta = { numeroConta, descricao, valor, dataVencimento };
+  const conta = { numeroConta, descricao, valor: valorNum, dataVencimento: dataNum };
   contasAPagar.push(conta);
   return contasAPagar.at(-1);
 }

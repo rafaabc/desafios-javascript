@@ -10,9 +10,9 @@ describe("Testes do registrarPaciente", () => {
       convenio: "Unimed",
     };
     registrarPaciente(paciente1);
-    assert.throws(() => {
-      registrarPaciente(paciente1);
-    }, /O prontuário não pode se repetir/);
+      assert.throws(() => {
+        registrarPaciente(paciente1);
+      }, { message: /O prontuário não pode se repetir/ });
   });
   it("Quando idade é inválida com limite inferior, deve lançar um erro", () => {
     const paciente2 = {
@@ -21,9 +21,9 @@ describe("Testes do registrarPaciente", () => {
       idade: -5,
       convenio: "Unimed",
     };
-    assert.throws(() => {
-      registrarPaciente(paciente2);
-    }, /A idade deve ser maior ou igual a 0 e menor ou igual a 120/);
+      assert.throws(() => {
+        registrarPaciente(paciente2);
+      }, { message: /A idade deve ser maior ou igual a 0 e menor ou igual a 120/ });
   });
   it("Quando idade é inválida com limite superior, deve lançar um erro", () => {
     const paciente4 = {
@@ -31,9 +31,9 @@ describe("Testes do registrarPaciente", () => {
       nome: "Paciente D",
       idade: 150,
     };
-    assert.throws(() => {
-      registrarPaciente(paciente4);
-    }, /A idade deve ser maior ou igual a 0 e menor ou igual a 120/);
+      assert.throws(() => {
+        registrarPaciente(paciente4);
+      }, { message: /A idade deve ser maior ou igual a 0 e menor ou igual a 120/ });
   });
   it("Quando convênio é inválido, deve lançar um erro", () => {
     const paciente5 = {
@@ -42,9 +42,20 @@ describe("Testes do registrarPaciente", () => {
       idade: 40,
       convenio: "Invalid",
     };
+      assert.throws(() => {
+        registrarPaciente(paciente5);
+      }, { message: /O convênio deve ser: Particular, Unimed, Bradesco ou SulAmérica/ });
+  });
+  it("Quando idade não for numérica, deve lançar um erro", () => {
+    const paciente6 = {
+      prontuario: "006",
+      nome: "Paciente F",
+      idade: "trinta",
+      convenio: "Unimed",
+    };
     assert.throws(() => {
-      registrarPaciente(paciente5);
-    }, /O convênio deve ser: Particular, Unimed, Bradesco ou SulAmérica/);
+      registrarPaciente(paciente6);
+    }, { message: /Parâmetro idade inválido: não é um número/ });
   });
   it("Quando os dados são válidos, deve registrar o paciente e retornar o último registro", () => {
     const paciente3 = {
@@ -54,6 +65,7 @@ describe("Testes do registrarPaciente", () => {
       convenio: "Unimed",
     };
     const ultimoRegistro = registrarPaciente(paciente3);
-    assert.deepStrictEqual(ultimoRegistro, paciente3);
+      const esperado = paciente3;
+      assert.deepStrictEqual(ultimoRegistro, esperado);
   });
 });

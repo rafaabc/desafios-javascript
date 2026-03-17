@@ -12,7 +12,7 @@ describe("Testes do registrarPedido", () => {
     registrarPedido(pedido1);
     assert.throws(() => {
       registrarPedido(pedido1);
-    }, /Número do pedido já existe./);
+    }, { message: /Número do pedido já existe./ });
   });
   it("Quando quantidade é inválida, deve lançar um erro", () => {
     const pedido2 = {
@@ -23,7 +23,7 @@ describe("Testes do registrarPedido", () => {
     };
     assert.throws(() => {
       registrarPedido(pedido2);
-    }, /A quantidade deve ser maior ou igual a 1./);
+    }, { message: /A quantidade deve ser maior ou igual a 1./ });
   });
   it("Quando valor unitário é inválido, deve lançar um erro", () => {
     const pedido3 = {
@@ -34,7 +34,7 @@ describe("Testes do registrarPedido", () => {
     };
     assert.throws(() => {
       registrarPedido(pedido3);
-    }, /O valor unitário deve ser maior que 0./);
+    }, { message: /O valor unitário deve ser maior que 0./ });
   });
   it("Quando pedido é válido, deve retornar o último pedido registrado", () => {
     const pedido4 = {
@@ -44,6 +44,13 @@ describe("Testes do registrarPedido", () => {
       valorUnitario: 25,
     };
     const ultimoPedido = registrarPedido(pedido4);
-    assert.deepStrictEqual(ultimoPedido, pedido4);
+    const esperado = pedido4;
+    assert.deepStrictEqual(ultimoPedido, esperado);
+  });
+
+  it("Quando valor unitario não for numérico, deve lançar erro", () => {
+    assert.throws(() => {
+      registrarPedido({ numeroPedido: 5, nomePrato: "X", quantidade: 1, valorUnitario: "vinte" });
+    }, { message: /Parâmetro valorUnitario inválido: não é um número/ });
   });
 });

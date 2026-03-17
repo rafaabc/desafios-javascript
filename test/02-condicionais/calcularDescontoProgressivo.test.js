@@ -37,4 +37,9 @@ describe("Testes do calculacalcularDescontoProgressivorDesconto", () => {
       "Valor original: R$ 500.01, Desconto aplicado: 20% e Valor final a pagar: R$ 400.008.",
     );
   });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => calcularDescontoProgressivo('abc'), {
+      message: /Parâmetro .* inválido: não é um número/
+    });
+  });
 });

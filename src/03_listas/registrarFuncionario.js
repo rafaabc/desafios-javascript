@@ -21,27 +21,15 @@
 const funcionarios = [];
 
 export function registrarFuncionario({ CPF, nome, cargo, salario }) {
-  if (
-    cargo != "Gerente" &&
-    cargo != "Analista" &&
-    cargo != "Assistente" &&
-    cargo != "Estagiário"
-  ) {
-    throw new Error(
-      "O cargo deve ser um dos seguintes: Gerente, Analista, Assistente ou Estagiário",
-    );
-  }
+  const cargosValidos = ["Gerente", "Analista", "Assistente", "Estagiário"];
+  if (!cargosValidos.includes(cargo)) throw new Error("O cargo deve ser um dos seguintes: Gerente, Analista, Assistente ou Estagiário");
 
-  if (salario <= 1412) {
-    throw new Error("O salário deve ser maior que 1412 (salário mínimo)");
-  }
-
-  funcionarios.push({
-    CPF: CPF,
-    nome: nome,
-    cargo: cargo,
-    salario: salario,
+  [["salario", salario]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
   });
+  const salarioNum = Number(salario);
+  if (salarioNum <= 1412) throw new Error("O salário deve ser maior que 1412 (salário mínimo)");
 
+  funcionarios.push({ CPF, nome, cargo, salario: salarioNum });
   return funcionarios.at(-1);
 }

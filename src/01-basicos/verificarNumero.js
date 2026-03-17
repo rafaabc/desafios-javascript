@@ -14,11 +14,12 @@
  * - Retornar exatamente as strings indicadas.
  */
 export function verificarNumero(n) {
-  if (n < 0) {
-    return `${n} é um número negativo.`;
-  } else if (n == 0) {
-    return `${n} é igual a 0.`;
-  } else {
-    return `${n} é um número positivo.`;
-  }
+  [["n", n]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const numero = Number(n);
+  if (numero < 0) return `${numero} é um número negativo.`;
+  if (numero == 0) return `${numero} é igual a 0.`;
+  return `${numero} é um número positivo.`;
 }

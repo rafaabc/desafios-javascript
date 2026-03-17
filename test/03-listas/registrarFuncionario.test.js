@@ -9,15 +9,9 @@ describe("Testes do registrarFuncionario", () => {
       cargo: "Estagiário",
       salario: 1411,
     };
-    assert.throws(
-      () => {
-        registrarFuncionario(funcionarioComSalarioInvalido);
-      },
-      {
-        name: "Error",
-        message: "O salário deve ser maior que 1412 (salário mínimo)",
-      },
-    );
+    assert.throws(() => {
+      registrarFuncionario(funcionarioComSalarioInvalido);
+    }, { message: /O salário deve ser maior que 1412 \(salário mínimo\)/ });
   });
 
   it("Quando enviar salario igual a 1412, deve retornar erro", () => {
@@ -27,15 +21,9 @@ describe("Testes do registrarFuncionario", () => {
       cargo: "Estagiário",
       salario: 1412,
     };
-    assert.throws(
-      () => {
-        registrarFuncionario(funcionarioComSalarioInvalido);
-      },
-      {
-        name: "Error",
-        message: "O salário deve ser maior que 1412 (salário mínimo)",
-      },
-    );
+    assert.throws(() => {
+      registrarFuncionario(funcionarioComSalarioInvalido);
+    }, { message: /O salário deve ser maior que 1412 \(salário mínimo\)/ });
   });
 
   it("Quando enviar cargo igual diferente de Gerente, Analista, Assistente ou Estagiário, deve retornar erro", () => {
@@ -45,16 +33,9 @@ describe("Testes do registrarFuncionario", () => {
       cargo: "Jovem Aprendiz",
       salario: 2000,
     };
-    assert.throws(
-      () => {
-        registrarFuncionario(funcionarioComSalarioInvalido);
-      },
-      {
-        name: "Error",
-        message:
-          "O cargo deve ser um dos seguintes: Gerente, Analista, Assistente ou Estagiário",
-      },
-    );
+    assert.throws(() => {
+      registrarFuncionario(funcionarioComSalarioInvalido);
+    }, { message: /O cargo deve ser um dos seguintes: Gerente, Analista, Assistente ou Estagiário/ });
   });
 
   it("Quando enviar funcionário com dados válidos, deve retornar o último registro", () => {
@@ -66,11 +47,19 @@ describe("Testes do registrarFuncionario", () => {
     };
     const funcionarioRegistrado = registrarFuncionario(funcionarioComDadosValidos);
 
-    assert.deepEqual(funcionarioRegistrado, {
+    const esperado = { CPF: "0123456", nome: "teste", cargo: "Estagiário", salario: 2000 };
+    assert.deepEqual(funcionarioRegistrado, esperado);
+  });
+
+  it("Quando enviar salario inválido (não numérico), deve retornar erro", () => {
+    const funcionarioComSalarioInvalido = {
       CPF: "0123456",
       nome: "teste",
       cargo: "Estagiário",
-      salario: 2000,
-    });
+      salario: "dois mil",
+    };
+    assert.throws(() => {
+      registrarFuncionario(funcionarioComSalarioInvalido);
+    }, { message: /Parâmetro salario inválido: não é um número/ });
   });
 });

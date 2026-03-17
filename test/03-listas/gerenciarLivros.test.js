@@ -3,28 +3,30 @@ import assert from "node:assert";
 
 describe("Testes do gerenciarLivros", () => {
   it("quando listar livros, deve retornar a lista dos livros já cadastrados", () => {
-    const resultadoEsperado = [
+    const resultadoAtual = listarLivros();
+    const esperado = [
       "Livro: 1984 / Autor: George Orwell / Páginas: 328",
       "Livro: Dom Casmurro / Autor: Machado de Assis / Páginas: 256",
       "Livro: O Senhor dos Anéis / Autor: J.R.R. Tolkien / Páginas: 1178",
     ];
-    const resultadoAtual = listarLivros();
 
-    assert.deepEqual(resultadoEsperado, resultadoAtual);
+    assert.deepEqual(resultadoAtual, esperado);
   });
 
   it("quando registrar livro, deve retornar o último livro registrado", () => {
-    const resultadoEsperado = {
-      titulo: "The Complete Fiction of H.P. Lovecraft",
-      autor: "H.P. Lovecraft",
-      paginas: 2125,
-    };
     const resultadoAtual = registrarLivro({
       titulo: "The Complete Fiction of H.P. Lovecraft",
       autor: "H.P. Lovecraft",
       paginas: 2125,
     });
+    const esperado = { titulo: "The Complete Fiction of H.P. Lovecraft", autor: "H.P. Lovecraft", paginas: 2125 };
 
-    assert.deepEqual(resultadoEsperado, resultadoAtual);
+    assert.deepEqual(resultadoAtual, esperado);
+  });
+
+  it("quando registrar livro com paginas inválidas (não numérico), deve lançar erro", () => {
+    assert.throws(() => {
+      registrarLivro({ titulo: "X", autor: "Y", paginas: "duzentas" });
+    }, { message: /Parâmetro paginas inválido: não é um número/ });
   });
 });

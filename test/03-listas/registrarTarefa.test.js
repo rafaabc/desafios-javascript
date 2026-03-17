@@ -14,6 +14,11 @@ describe("Testes do registrarTarefa", () => {
       registrarTarefa(tarefa1);
     }, /O ID não pode se repetir/);
   });
+  it("quando o ID não for numérico deve lançar erro", () => {
+    assert.throws(() => {
+      registrarTarefa({ id: "um", descricao: "X", prioridade: "Baixa", status: "Pendente" });
+    }, { message: /Parâmetro id inválido: não é um número/ });
+  });
   it("quando a prioridade é inválida, deve lançar um erro", () => {
     const tarefa2 = {
       id: 2,
@@ -44,6 +49,7 @@ describe("Testes do registrarTarefa", () => {
       status: "Pendente",
     };
     const ultimaTarefa = registrarTarefa(tarefa4);
-    assert.deepStrictEqual(ultimaTarefa, tarefa4);
+    const esperado = tarefa4;
+    assert.deepStrictEqual(ultimaTarefa, esperado);
   });
 });

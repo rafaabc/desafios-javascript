@@ -25,8 +25,12 @@ export function calcularConsumoCombustivel(
   distanciaPercorridaEmKM,
   quantidadeCombustivelGastoEmL,
 ) {
-  const resultadoConsumoCombustivel =
-    distanciaPercorridaEmKM / quantidadeCombustivelGastoEmL;
+  [["distanciaPercorridaEmKM", distanciaPercorridaEmKM], ["quantidadeCombustivelGastoEmL", quantidadeCombustivelGastoEmL]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  if (Number(quantidadeCombustivelGastoEmL) === 0) throw new Error('Parâmetro quantidadeCombustivelGastoEmL inválido: divisão por zero');
 
-  return `O consumo médio do veículo é de ${resultadoConsumoCombustivel} km/L.`;
+  const consumoMedio = Number(distanciaPercorridaEmKM) / Number(quantidadeCombustivelGastoEmL);
+
+  return `O consumo médio do veículo é de ${consumoMedio} km/L.`;
 }

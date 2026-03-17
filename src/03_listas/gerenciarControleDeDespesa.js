@@ -52,9 +52,11 @@ export function listarDespesas() {
 }
 
 export function registrarDespesa({ descricao, valor, categoria }) {
+  if (Number.isNaN(Number(valor))) throw new Error('Parâmetro valor inválido: não é um número');
+
   const novaDespesa = {
     descricao,
-    valor,
+    valor: Number(valor),
     categoria,
   };
   despesas.push(novaDespesa);

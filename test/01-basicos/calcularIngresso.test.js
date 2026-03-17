@@ -40,6 +40,20 @@ describe("Testes do calcularIngresso", () => {
   });
   it("Quando enviar idade 61 deve retornar a idade e ingresso a R$ 15", () => {
     const idade = calcularIngresso(61);
-    assert.equal(idade, "Você tem 61 anos. O valor do ingresso é de R$ 15.");
+    const esperado = "Você tem 61 anos. O valor do ingresso é de R$ 15.";
+    assert.equal(
+      idade,
+      esperado,
+    );
+  });
+  it("Quando enviar valor não numérico deve lançar erro", () => {
+    assert.throws(() => calcularIngresso('abc'), {
+      message: /Parâmetro idade inválido: não é um número/
+    });
+  });
+
+  it("Quando enviar idade negativa que não se encaixe em nenhuma regra, deve retornar undefined", () => {
+    const resultado = calcularIngresso(-1);
+    assert.equal(resultado, undefined);
   });
 });

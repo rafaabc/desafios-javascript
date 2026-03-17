@@ -28,30 +28,16 @@ export function cadastrarCurso({ codigo, nome, cargaHoraria, categoria }) {
   if (cursos.some((c) => c.codigo === codigo)) {
     throw new Error("O código não pode se repetir");
   }
+  [["cargaHoraria", cargaHoraria]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+  const cargaNum = Number(cargaHoraria);
+  if (cargaNum < 4 || cargaNum > 200) throw new Error("A carga horária deve ser maior ou igual a 4 e menor ou igual a 200");
 
-  if (cargaHoraria < 4 || cargaHoraria > 200) {
-    throw new Error(
-      "A carga horária deve ser maior ou igual a 4 e menor ou igual a 200",
-    );
-  }
+  const categoriasValidas = ["Tecnologia", "Design", "Marketing", "Negócios"];
+  if (!categoriasValidas.includes(categoria)) throw new Error("A categoria deve ser: Tecnologia, Design, Marketing ou Negócios");
 
-  if (
-    categoria !== "Tecnologia" &&
-    categoria !== "Design" &&
-    categoria !== "Marketing" &&
-    categoria !== "Negócios"
-  ) {
-    throw new Error(
-      "A categoria deve ser: Tecnologia, Design, Marketing ou Negócios",
-    );
-  }
-
-  const curso = {
-    codigo: codigo,
-    nome: nome,
-    cargaHoraria: cargaHoraria,
-    categoria: categoria,
-  };
+  const curso = { codigo, nome, cargaHoraria: cargaNum, categoria };
 
   cursos.push(curso);
 

@@ -47,11 +47,11 @@ export function listarPratos() {
 }
 
 export function registrarPrato({ nome, preco, calorias }) {
-  const novoPrato = {
-    nome,
-    preco,
-    calorias,
-  };
+  [["preco", preco], ["calorias", calorias]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const novoPrato = { nome, preco: Number(preco), calorias: Number(calorias) };
   cardapio.push(novoPrato);
   return cardapio.at(-1);
 }

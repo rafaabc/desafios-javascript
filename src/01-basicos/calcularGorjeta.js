@@ -23,8 +23,12 @@
  * - String: "Gorjeta: R$ G / Valor Final: R$ V." (valores numéricos substituídos)
  */
 export function calcularGorjeta(valorConta, porcentagem) {
-  const gorjeta = (porcentagem / 100) * valorConta;
-  const valorFinal = valorConta + gorjeta;
+  [["valorConta", valorConta], ["porcentagem", porcentagem]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
 
-  return "Gorjeta: R$ " + gorjeta + " / Valor Final: R$ " + valorFinal + ".";
+  const gorjeta = (Number(porcentagem) / 100) * Number(valorConta);
+  const valorFinal = Number(valorConta) + gorjeta;
+
+  return `Gorjeta: R$ ${gorjeta} / Valor Final: R$ ${valorFinal}.`;
 }

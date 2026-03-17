@@ -48,11 +48,11 @@ export function listarFuncionarios() {
 }
 
 export function registrarFuncionario({ nome, cargo, salario }) {
-  const novoFuncionario = {
-    nome,
-    cargo,
-    salario,
-  };
+  [["salario", salario]].forEach(([name, v]) => {
+    if (Number.isNaN(Number(v))) throw new Error(`Parâmetro ${name} inválido: não é um número`);
+  });
+
+  const novoFuncionario = { nome, cargo, salario: Number(salario) };
   funcionarios.push(novoFuncionario);
   return funcionarios.at(-1);
 }
